@@ -9,7 +9,6 @@ See 'data/README.txt'for information on the original data. All data for this pro
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 and is located in the data folder of this R Project 'WearableComputing'
 
-
 One R script called run_analysis.R that does the following: 
 
 - Merges the training and the test sets to create one data set.
