@@ -73,9 +73,11 @@ tidy_wearable_data <- function(){
           all_avg <- cbind(all_avg, b[,3])
         }
       }
-      
+      all_avg
       ##put tidy datasets into list for function to return
-      wearable_datasets <- list(data_filtered, all_avg)
-      wearable_datasets        
+      ##this was before I started submitting assignment and only second data set
+      ##is required. Leaving it here as it's a better solution
+      ##wearable_datasets <- list(data_filtered, all_avg)
+      ##wearable_datasets        
 }
       

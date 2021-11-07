@@ -3,6 +3,8 @@
 
 Getting and Cleaning Data Course Project
 
+Note that I did this project and then instructions changed when submitting, where output of run_analysis.R is "The output should be the tidy data set you submitted for part 1." That's not very clear, so I'm assuming part 1 is the file uploaded via submission screen "Please upload the tidy data set created in step 5 of the instructions". I had made the script output a list containing both data sets. As I'm getting close to submission deadline leaving explanation of the script as I originally built it.
+
 The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis. 
 
 See 'data/README.txt'for information on the original data. All data for this project is sourced from
