@@ -34,13 +34,13 @@ Subjects codes are left as numbers as it's not appropriate to use real names for
 The mean and standard deviation columns are selected using the contains function.
 
 Dataset 2 - (output list[[2]])
-Variables
-'subject_code': code for each participant used to mask names values 1:30
-'activity': six activity subjects were measured performing
-columns 3-566: all measurements as described in 'data/features_info.txt'
-Transformations
-train and test data sets both have additional columns added for subjects code and activity of each measurement and then combined into one data set.
-Meaningful labels are added for all columns, 3:563 labelled using descriptions in 'data/features.txt'
-Values of activity column are substituted from 'data/activity_labels.txt' to text descriptions rather than numbers 1 to 6.
-Subjects codes are left as numbers as it's not appropriate to use real names for privacy.
-The data set is grouped by subject_code and activity, then each column 3:563 is summarised as a mean() on the grouping.
+Variables  
+'subject_code': code for each participant used to mask names values 1:30  
+'activity': six activity subjects were measured performing  
+columns 3-566: all measurements as described in 'data/features_info.txt'  
+Transformations  
+train and test data sets both have additional columns added for subjects code and activity of each measurement and then combined into one data set.  
+Meaningful labels are added for all columns, 3:563 labelled using descriptions in 'data/features.txt'  
+Values of activity column are substituted from 'data/activity_labels.txt' to text descriptions rather than numbers 1 to 6.  
+Subjects codes are left as numbers as it's not appropriate to use real names for privacy.  
+The data set is grouped by subject_code and activity, then each column 3:563 is summarised as a mean() on the grouping.  
