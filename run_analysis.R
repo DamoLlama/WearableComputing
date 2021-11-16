@@ -17,10 +17,6 @@ tidy_wearable_data <- function(){
       activities <- readLines("data/activity_labels.txt")
       label_data <- readLines("data/features.txt")
       
-      #create datatables for grouping and summarising
-      train2 <- train
-      test2 <- test
-      
       ##apply meaningful labels to activities
       for (j in 1:length(activities)){
             x <- strsplit(activities[j], split = " ")
@@ -30,17 +26,18 @@ tidy_wearable_data <- function(){
       train_activity <- data.frame(train_activity)
       test_activity <- data.frame(test_activity)
       
-      ##make lower case for tidyness
+      ##make lower case and remove number, space for tidiness
       label_data <- tolower(label_data)
+      label_data <- sub("[0-9]+ ", "", label_data)
 
         ##rename column labels
-      names(train) <- label_data
-      names(train_activity) <- "activity"
-      names(train_subject) <- "subject_code"  
+      colnames(train) <- label_data
+      colnames(train_activity) <- "activity"
+      colnames(train_subject) <- "participant_number"  
       
-      names(test) <- label_data
-      names(test_activity) <- "activity"
-      names(test_subject) <- "subject_code" 
+      colnames(test) <- label_data
+      colnames(test_activity) <- "activity"
+      colnames(test_subject) <- "participant_number" 
         
       train_combined <- cbind(train_subject, train_activity, train)
       test_combined <- cbind(test_subject, test_activity, test)
@@ -48,36 +45,28 @@ tidy_wearable_data <- function(){
       all_combined <- rbind(train_combined, test_combined)
       
       ##Tidy data set of combined data for mean() & std() of each measurement
-      data_filtered <- select(all_combined, subject_code, activity, contains(c("mean()", "std()")))
       ##data_filtered first tidy dataset 
+      data_filtered <- select(all_combined, participant_number, activity, contains(c("mean()", "std()")))
       
-      ##build combined dataset for summarising
-      train_combined2 <- cbind(train_subject, train_activity, train2)
-      test_combined2 <- cbind(test_subject, test_activity, test2)
-      
-      all_combined2 <- rbind(train_combined2, test_combined2)
+
       ##group data set by subjects and activity
-      a <- all_combined2 %>% group_by(subject_code, activity)
+      a <- data_filtered %>% group_by(participant_number, activity)
       
       ##loop through grouped data to summarise each variable with an
       ## average of each variable for each activity and each subject
-      ## column names are changed after summarise as the new names wouldn't 
-      ## work with the summarise function
-      for(i in 1:561){
-        v <- as.name(paste(c("V",i), collapse = ""))
-        m <- label_data[i]
+      for(i in 3:68){
+        v <- as.name(v <- as.name(colnames(a[i])))
+        m <- paste("average_",colnames(a[i]), sep = "")
         b <- a %>% summarise(!!m := mean(!!v))
-        if(i == 1){
+        if(i == 3){
           all_avg <- b
          }else{
           all_avg <- cbind(all_avg, b[,3])
         }
       }
-      all_avg
-      ##put tidy datasets into list for function to return
-      ##this was before I started submitting assignment and only second data set
-      ##is required. Leaving it here as it's a better solution
-      ##wearable_datasets <- list(data_filtered, all_avg)
-      ##wearable_datasets        
+      
+      ##write tidy dataset to file as output
+      write.table(all_avg, file = "wearablecomputing_output.txt")
+
 }
       
